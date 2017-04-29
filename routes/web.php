@@ -14,6 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/articles', 'ArticlesController@index');
-Route::post('/articles', 'ArticlesController@store');
