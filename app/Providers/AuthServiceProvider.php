@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Article;
+use App\Policies\ArticlePolicy;
 use Carbon\Carbon;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Article::class => ArticlePolicy::class
     ];
 
     /**

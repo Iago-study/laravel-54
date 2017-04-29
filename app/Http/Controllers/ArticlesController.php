@@ -4,15 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ArticlesController
+ * @package App\Http\Controllers
+ */
 class ArticlesController extends Controller
 {
 
+    /**
+     * @param Article $articles
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function index(Article $articles)
     {
         return $articles->all();
     }
 
+    /**
+     * @param Request $request
+     * @param Article $article
+     *
+     * @return mixed
+     */
     public function store(Request $request, Article $article)
     {
         $this->validate($request, [
@@ -32,4 +48,16 @@ class ArticlesController extends Controller
         return response(['message' => 'Error in create a article!'])->setStatusCode(500);
     }
 
+    /**
+     * @param $articleId
+     * @param \App\Article $article
+     * @return mixed
+     */
+    public function show($articleId, Article $article)
+    {
+        $article = $article->find($articleId);
+        $this->authorize('show', $article);
+
+        return $article;
+    }
 }

@@ -27,6 +27,7 @@ $factory->define(App\Article::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->text(100),
         'description' => $faker->paragraphs(3, true),
+        'user_id' => factory(\App\User::class)->create()->id
     ];
 });
 
