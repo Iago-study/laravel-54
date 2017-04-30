@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Article extends Model
 {
@@ -15,5 +16,15 @@ class Article extends Model
     protected $fillable = [
         'title', 'description',
     ];
+
+    public function scopeOwner($query)
+    {
+        return $query->where('user_id', '=', Auth::id());
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=', 1);
+    }
 
 }

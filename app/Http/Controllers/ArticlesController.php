@@ -20,7 +20,7 @@ class ArticlesController extends Controller
      */
     public function index(Article $articles)
     {
-        return $articles->all();
+        return $articles->owner()->active()->get();
     }
 
     /**
